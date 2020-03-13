@@ -47,7 +47,7 @@ class Instance(AuditModel, ActiveModel):
         unique_together = ('setting', 'name',)
 
     def __str__(self):
-        return '{}.{}'.format(self.setting.name, self.name)
+        return '{} > {}'.format(self.setting.name, self.name)
 
 
 class Value(AuditModel):
