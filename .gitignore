@@ -218,4 +218,8 @@ pip-selfcheck.json
 # Ignore all local history of files
 .history
 
+### Local files
+test_settings
+manage.py
+
 # End of https://www.gitignore.io/api/macos,django,python,virtualenv,visualstudiocode
