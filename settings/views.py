@@ -12,11 +12,6 @@ def get(request):
 
 
 @staff_member_required
-def refresh(request):
-    return JsonResponse({'cache': {'result': clear_settings_cache()}})
-
-
-@staff_member_required
 def admin_refresh_page(request):
     if clear_settings_cache():
         messages.add_message(request, messages.INFO,
