@@ -1,8 +1,16 @@
+from cachetools import TTLCache, cached
 from django.conf import settings
 
 from .models import Value
 
+maxsize = settings.SETTINGS_CACHE_MAXSIZE if hasattr(
+    settings, 'SETTINGS_CACHE_MAXSIZE') else 100
+ttl = settings.SETTINGS_CACHE_TTL if hasattr(
+    settings, 'SETTINGS_CACHE_TTL') else 60*60
+settings_cache = TTLCache(maxsize, ttl)
 
+
+@cached(settings_cache)
 def get_setting(setting, include_non_public=False):
 
     if include_non_public:
@@ -24,6 +32,7 @@ def get_setting(setting, include_non_public=False):
 
 def clear_settings_cache():
     try:
+        settings_cache.clear()
         return True
     except:
         return False
