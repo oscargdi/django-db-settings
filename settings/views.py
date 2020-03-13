@@ -24,4 +24,4 @@ def admin_refresh_page(request):
     else:
         messages.add_message(request, messages.ERROR,
                              'Cache could not be refreshed')
-    return redirect('admin:settings_setting_changelist')
+    return redirect('admin:settings_value_changelist')

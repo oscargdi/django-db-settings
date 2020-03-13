@@ -8,8 +8,6 @@ class SettingAdmin(admin.ModelAdmin):
     list_display = ('name', 'active',)
     search_fields = ('name',)
 
-    change_list_template = 'settings/change_list_template.html'
-
 
 @admin.register(Field)
 class FieldAdmin(admin.ModelAdmin):
@@ -31,3 +29,5 @@ class ValueAdmin(admin.ModelAdmin):
     list_filter = ('instance__setting__name', 'instance__name', 'field__name',)
     search_fields = ('instance__setting__name',
                      'instance__name', 'field__name',)
+
+    change_list_template = 'settings/change_list_template.html'
