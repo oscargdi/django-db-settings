@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools-items %}
+{{ block.super }}
+<li>
+    <a href="{% url 'settings-refresh-admin' %}" class="refresh-button">
+        refresh settings
+    </a>
+</li>
+{% endblock object-tools-items %}

@@ -1,12 +1,14 @@
 from django.contrib import admin
 
-from .models import Setting, Field, Instance, Value
+from .models import Field, Instance, Setting, Value
 
 
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     list_display = ('name', 'active',)
     search_fields = ('name',)
+
+    change_list_template = 'settings/change_list_template.html'
 
 
 @admin.register(Field)
