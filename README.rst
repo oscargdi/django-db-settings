@@ -1,6 +1,5 @@
-=====
 django-db-settings
-=====
+==================
 
 django-db-settings is a Django app to save your configuration in cacheable DB objects that are easily defined like classes.
 
