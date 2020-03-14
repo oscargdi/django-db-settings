@@ -34,6 +34,7 @@ class Field(AuditModel, ActiveModel):
 
     class Meta:
         unique_together = ('setting', 'name',)
+        ordering = ('setting__name', 'name',)
 
     def __str__(self):
         return '{}.{}'.format(self.setting.name, self.name)
@@ -45,6 +46,7 @@ class Instance(AuditModel, ActiveModel):
 
     class Meta:
         unique_together = ('setting', 'name',)
+        ordering = ('setting__name', 'name',)
 
     def __str__(self):
         return '{} > {}'.format(self.setting.name, self.name)
