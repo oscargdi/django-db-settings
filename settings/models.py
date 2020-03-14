@@ -33,8 +33,11 @@ class Field(AuditModel, ActiveModel):
     name = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = ('setting', 'name',)
         ordering = ('setting__name', 'name',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['setting', 'name'], name='unique field')
+        ]
 
     def __str__(self):
         return '{}.{}'.format(self.setting.name, self.name)
@@ -45,8 +48,11 @@ class Instance(AuditModel, ActiveModel):
     name = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = ('setting', 'name',)
         ordering = ('setting__name', 'name',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['setting', 'name'], name='unique instance')
+        ]
 
     def __str__(self):
         return '{} > {}'.format(self.setting.name, self.name)
