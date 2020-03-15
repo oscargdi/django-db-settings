@@ -8,7 +8,7 @@ Quick start
 
 1. Install ``django-db-settings`` using ``pip``:
 
-    >>> pip install django-db-settings
+    pip install django-db-settings
 
 
 2. Add "settings" to your INSTALLED_APPS setting like this::
