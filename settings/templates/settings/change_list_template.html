@@ -2,7 +2,7 @@
 {% block object-tools-items %}
 {{ block.super }}
 <li>
-    <a href="refresh/" class="refresh-button">
+    <a href="{% url 'admin:settings_value_refresh' %}" class="refresh-button">
         refresh settings
     </a>
 </li>

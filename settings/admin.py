@@ -36,15 +36,15 @@ class ValueAdmin(admin.ModelAdmin):
     change_list_template = 'settings/change_list_template.html'
 
     def get_urls(self):
+        info = self.model._meta.app_label, self.model._meta.model_name
         urls = super().get_urls()
-
-        my_urls = [path(
-            'refresh/', self.admin_site.admin_view(self.refresh)),
+        my_urls = [
+            path('refresh/', self.admin_site.admin_view(self.refresh_view),
+                 name='%s_%s_refresh' % info),
         ]
-
         return my_urls + urls
 
-    def refresh(self, request):
+    def refresh_view(self, request):
         if clear_settings_cache():
             messages.add_message(request, messages.INFO,
                                  'Cache was successfully refreshed')
