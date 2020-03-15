@@ -1,5 +1,8 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.shortcuts import redirect
+from django.urls import path
 
+from .business import clear_settings_cache
 from .models import Field, Instance, Setting, Value
 
 
@@ -31,3 +34,21 @@ class ValueAdmin(admin.ModelAdmin):
                      'instance__name', 'field__name',)
 
     change_list_template = 'settings/change_list_template.html'
+
+    def get_urls(self):
+        urls = super().get_urls()
+
+        my_urls = [path(
+            'refresh/', self.admin_site.admin_view(self.refresh)),
+        ]
+
+        return my_urls + urls
+
+    def refresh(self, request):
+        if clear_settings_cache():
+            messages.add_message(request, messages.INFO,
+                                 'Cache was successfully refreshed')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 'Cache could not be refreshed')
+        return redirect('admin:settings_value_changelist')
