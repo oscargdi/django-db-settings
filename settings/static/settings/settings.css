@@ -1,3 +1,10 @@
 #view-all-results table {
     width: 100%;
 }
+
+@media (max-width: 480px) {
+    #view-all-results table {
+      display: block;
+      overflow-x: auto;
+    }
+}
