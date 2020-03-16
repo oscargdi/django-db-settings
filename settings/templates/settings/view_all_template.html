@@ -29,15 +29,20 @@
                 <th>Setting</th>
                 <th>Instance</th>
                 <th>Field</th>
+                <th>Public</th>
                 <th>Value</th>
             </thead>
             <tbody>
+                {% for value in values %}
                 <tr>
-                    <td>market</td>
-                    <td>peru</td>
-                    <td>icon</td>
-                    <td>flag</td>
+                    <td>{{value.s_name}}</td>
+                    <td>{{value.i_name}}</td>
+                    <td>{{value.f_name}}</td>
+                    <td>{% if value.f_public %}<img src="/static/admin/img/icon-yes.svg" alt="True">{% else %} <img
+                            src="/static/admin/img/icon-no.svg" alt="False"> {% endif %}</td>
+                    <td>{{value.v_value}}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

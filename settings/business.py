@@ -1,5 +1,6 @@
 from cachetools import TTLCache, cached
 from django.conf import settings
+from django.db import connection
 
 from .models import Value
 
@@ -36,3 +37,19 @@ def clear_settings_cache():
         return True
     except:
         return False
+
+
+def _dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+
+def return_all_values():
+    with connection.cursor() as cursor:
+        cursor.execute("""select s.name s_name, i.name i_name, f.name f_name, f.public f_public, v.value v_value 
+                        from settings_value v
+                        INNER JOIN settings_field f on f.id = v.field_id
+                        INNER JOIN settings_instance i on i.id = v.instance_id
+                        INNER JOIN settings_setting s on s.id = i.setting_id""")
+        return _dictfetchall(cursor)

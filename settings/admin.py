@@ -2,7 +2,7 @@ from django.contrib import admin, messages
 from django.shortcuts import redirect, render
 from django.urls import path
 
-from .business import clear_settings_cache
+from .business import clear_settings_cache, return_all_values
 from .models import Field, Instance, Setting, Value
 
 
@@ -56,5 +56,6 @@ class ValueAdmin(admin.ModelAdmin):
         return redirect('admin:settings_value_changelist')
 
     def all_view(self, request):
-        context = {**self.admin_site.each_context(request), }
+        context = {
+            **self.admin_site.each_context(request), 'values': return_all_values()}
         return render(request, "settings/view_all_template.html", context)
