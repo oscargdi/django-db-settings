@@ -1,8 +1,16 @@
 {% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}View current settings {{block.super}}{% endblock title %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'settings/settings.css' %}">
+{% endblock extrastyle %}
 
 {% block content %}
 <div id="content-main">
-    <h1>Hello Template</h1>
+    <h1>Current settings</h1>
     <ul class="object-tools">
         <li>
             <a href="{% url 'admin:settings_value_add' %}" class="addlink">
@@ -15,5 +23,23 @@
             </a>
         </li>
     </ul>
+    <div id="view-all-results">
+        <table>
+            <thead>
+                <th>Setting</th>
+                <th>Instance</th>
+                <th>Field</th>
+                <th>Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>market</td>
+                    <td>peru</td>
+                    <td>icon</td>
+                    <td>flag</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
